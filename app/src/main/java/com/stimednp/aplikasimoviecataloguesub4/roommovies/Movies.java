@@ -1,4 +1,4 @@
-package com.stimednp.aplikasimoviecataloguesub4.testing;
+package com.stimednp.aplikasimoviecataloguesub4.roommovies;
 
 import android.os.Parcel;
 import android.os.Parcelable;
@@ -6,8 +6,6 @@ import android.os.Parcelable;
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
-
-import java.io.Serializable;
 
 /**
  * Created by rivaldy on 8/4/2019.

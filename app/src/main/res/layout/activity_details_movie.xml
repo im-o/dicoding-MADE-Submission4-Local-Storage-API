@@ -2,9 +2,10 @@
 <androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/container_coordinator_detail"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorTransparant"
+    android:background="@color/colorWhite"
     tools:context=".myactivity.DetailsMovieActivity">
 
     <com.google.android.material.appbar.AppBarLayout
@@ -39,7 +40,7 @@
             <androidx.appcompat.widget.Toolbar
                 android:id="@+id/toolbar_detail"
                 android:layout_width="match_parent"
-                android:layout_height="?actionBarSize"
+                android:layout_height="@dimen/appbar_size"
                 android:theme="@style/ThemeOverlay.AppCompat.Light"
                 app:layout_collapseMode="pin"
                 app:title="@string/str_detail" />
@@ -61,6 +62,36 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent">
+
+
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
+                android:id="@+id/fab_favorite_false"
+                style="@style/Widget.MaterialComponents.FloatingActionButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom|end"
+                app:layout_constraintBottom_toBottomOf="@+id/view"
+                app:layout_constraintEnd_toEndOf="@+id/card_view_img_detail"
+                app:layout_constraintStart_toStartOf="@+id/card_view_img_detail"
+                app:layout_constraintTop_toBottomOf="@+id/view"
+                app:layout_constraintVertical_bias="0.0"
+                app:rippleColor="@color/colorWhite"
+                app:srcCompat="@drawable/ic_favorite_border_before" />
+
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
+                android:id="@+id/fab_favorite_true"
+                style="@style/Widget.MaterialComponents.FloatingActionButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom|end"
+                android:visibility="invisible"
+                app:layout_constraintBottom_toBottomOf="@+id/view"
+                app:layout_constraintEnd_toEndOf="@+id/card_view_img_detail"
+                app:layout_constraintStart_toStartOf="@+id/card_view_img_detail"
+                app:layout_constraintTop_toBottomOf="@+id/view"
+                app:layout_constraintVertical_bias="0.0"
+                app:rippleColor="@color/colorWhite"
+                app:srcCompat="@drawable/ic_favorite_true_24dp" />
 
             <androidx.cardview.widget.CardView
                 android:id="@+id/card_view_img_detail"
@@ -164,7 +195,7 @@
                 android:layout_width="0dp"
                 android:layout_height="1dp"
                 android:layout_marginStart="16dp"
-                android:layout_marginTop="16dp"
+                android:layout_marginTop="40dp"
                 android:layout_marginEnd="16dp"
                 android:background="@color/colorDivider"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -176,13 +207,14 @@
                 android:id="@+id/view_bg_overview"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
-                android:layout_marginTop="16dp"
+                android:layout_marginTop="36dp"
                 android:background="@drawable/bg_corner_radius"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintHorizontal_bias="1.0"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/view" />
+                app:layout_constraintTop_toBottomOf="@+id/view"
+                app:layout_constraintVertical_bias="0.0" />
 
             <TextView
                 android:id="@+id/tv_overview_detail"
@@ -223,8 +255,9 @@
                 android:textAlignment="center"
                 android:textColor="@color/colorWhite"
                 app:layout_constraintBottom_toTopOf="@+id/view_bg_overview"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="@+id/view_bg_overview"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="@+id/view_bg_overview"
                 app:layout_constraintTop_toBottomOf="@+id/view_divider1"
                 app:layout_constraintVertical_bias="0.0"
                 tools:text="@string/lorem" />

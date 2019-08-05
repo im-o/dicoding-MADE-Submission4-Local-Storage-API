@@ -1,43 +1,45 @@
 package com.stimednp.aplikasimoviecataloguesub4.myfragment;
 
 
-import android.annotation.SuppressLint;
-import android.os.AsyncTask;
 import android.os.Bundle;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
-
+import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.ProgressBar;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
+import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProviders;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.stimednp.aplikasimoviecataloguesub4.R;
-import com.stimednp.aplikasimoviecataloguesub4.adapter.MovieItemsAdapter;
-import com.stimednp.aplikasimoviecataloguesub4.mymodel.MainViewModel;
-import com.stimednp.aplikasimoviecataloguesub4.testing.Movies;
-import com.stimednp.aplikasimoviecataloguesub4.testing.MoviesAdapter;
-import com.stimednp.aplikasimoviecataloguesub4.testingdb.DatabaseClientMovies;
+import com.stimednp.aplikasimoviecataloguesub4.roommovies.Movies;
+import com.stimednp.aplikasimoviecataloguesub4.roommovies.MoviesAdapter;
+import com.stimednp.aplikasimoviecataloguesub4.roomdb.MoviesViewModel;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * A simple {@link Fragment} subclass.
  */
-public class FavMoviesFragment extends Fragment {
+public class FavMoviesFragment extends Fragment implements SwipeRefreshLayout.OnRefreshListener {
     private static final String TAG = NavMoviesFragment.class.getSimpleName();
     private RecyclerView recyclerViewMovie;
-    private MainViewModel mainViewModel;
-    private MovieItemsAdapter movieItemsAdapter;
+    private MoviesAdapter moviesAdapter;
     private SwipeRefreshLayout refreshLayoutMovie;
-    private FrameLayout frameLayoutMovie;
     private ProgressBar progressBarMovie;
+    private MoviesViewModel moviesViewModel;
+    private TextView textViewEmpty;
 
     public FavMoviesFragment() {
         // Required empty public constructor
@@ -52,36 +54,45 @@ public class FavMoviesFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        textViewEmpty = view.findViewById(R.id.tv_movies_empty);
         progressBarMovie = view.findViewById(R.id.progressbar_tab_movies_room);
         refreshLayoutMovie = view.findViewById(R.id.swipe_scroll_movie_room);
-        frameLayoutMovie = view.findViewById(R.id.framel_movie_room);
         recyclerViewMovie = view.findViewById(R.id.rv_tab_movies_room);
         recyclerViewMovie.setLayoutManager(new LinearLayoutManager(getContext()));
-        getMovies();
+        refreshLayoutMovie.setOnRefreshListener(this);
+
+        callDataViewModel();
+
     }
 
-    private void getMovies() {
-        @SuppressLint("StaticFieldLeak")
-        class GetMovies extends AsyncTask<Void, Void, ArrayList<Movies>> {
-
+    private void callDataViewModel() {
+        moviesViewModel = ViewModelProviders.of(this).get(MoviesViewModel.class);
+        moviesViewModel.getMoviesList().observe(this, new Observer<List<Movies>>() {
             @Override
-            protected ArrayList<Movies> doInBackground(Void... voids) {
-                ArrayList<Movies> moviesList = (ArrayList<Movies>) DatabaseClientMovies
-                        .getInstance(getContext())
-                        .getAppDatabase()
-                        .moviesDao()
-                        .getAllMovies();
-                return moviesList;
+            public void onChanged(List<Movies> movies) {
+                moviesAdapter = new MoviesAdapter(getContext(), (ArrayList<Movies>) movies);
+                moviesAdapter.setMoviesList((ArrayList<Movies>) movies);
+                recyclerViewMovie.setAdapter(moviesAdapter);
+                if (movies.size() < 1){
+                    textViewEmpty.setVisibility(View.VISIBLE);
+                } else {
+                    textViewEmpty.setVisibility(View.GONE);
+                }
+                progressBarMovie.setVisibility(View.GONE);
             }
+        });
+    }
 
+    @Override
+    public void onRefresh() {
+        new Handler().postDelayed(new Runnable() {
             @Override
-            protected void onPostExecute(ArrayList<Movies> movies) {
-                super.onPostExecute(movies);
-                MoviesAdapter adapter = new MoviesAdapter(getContext(), movies);
-                recyclerViewMovie.setAdapter(adapter);
+            public void run() {
+                if (refreshLayoutMovie.isRefreshing()) {
+                    callDataViewModel();
+                    refreshLayoutMovie.setRefreshing(false);
+                }
             }
-        }
-        GetMovies getMovies = new GetMovies();
-        getMovies.execute();
+        }, 1000);
     }
 }

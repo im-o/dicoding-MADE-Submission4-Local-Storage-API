@@ -15,7 +15,7 @@
         <com.google.android.material.tabs.TabLayout
             android:id="@+id/tab_layout_favorite"
             android:layout_width="match_parent"
-            android:layout_height="60dp"
+            android:layout_height="@dimen/appbar_size"
             android:background="@color/colorPrimary"
             android:minHeight="?actionBarSize"
             app:tabBackground="@color/colorPrimary"
@@ -24,6 +24,7 @@
             app:tabIndicatorColor="@color/colorWhite"
             app:tabIndicatorHeight="4dp"
             app:tabMode="fixed"
+            app:tabInlineLabel="true"
             app:tabSelectedTextColor="@color/colorWhite"
             app:tabTextColor="@color/colorSecondaryText" />
     </com.google.android.material.appbar.AppBarLayout>

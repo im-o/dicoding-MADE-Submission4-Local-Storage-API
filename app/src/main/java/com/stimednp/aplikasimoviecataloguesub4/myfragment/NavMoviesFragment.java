@@ -5,6 +5,7 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.coordinatorlayout.widget.CoordinatorLayout;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
@@ -19,6 +20,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.ProgressBar;
+import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import com.google.android.material.snackbar.Snackbar;
@@ -40,7 +42,7 @@ public class NavMoviesFragment extends Fragment implements SwipeRefreshLayout.On
     private MainViewModel mainViewModel;
     private MovieItemsAdapter movieItemsAdapter;
     private SwipeRefreshLayout refreshLayoutMovie;
-    private FrameLayout frameLayoutMovie;
+    private RelativeLayout frameLayoutMovie;
     private ProgressBar progressBarMovie;
 
     public NavMoviesFragment() {
@@ -62,7 +64,6 @@ public class NavMoviesFragment extends Fragment implements SwipeRefreshLayout.On
         recyclerViewMovie = view.findViewById(R.id.rv_tab_movies);
 
         if (getActivity() != null){
-            Toast.makeText(getContext(), "NOT NULL "+TAG, Toast.LENGTH_SHORT).show();
             mainViewModel = ViewModelProviders.of(getActivity()).get(MainViewModel.class);
             mainViewModel.getListMovies().observe(getActivity(), getMovie);
             movieItemsAdapter = new MovieItemsAdapter(getContext());
@@ -99,14 +100,13 @@ public class NavMoviesFragment extends Fragment implements SwipeRefreshLayout.On
                 if (status == 0) {//disconnect
                     showLoading(false);
                     timeRecyclerLoadFalse();
-                    Toast.makeText(getContext(), "No INTERNET", Toast.LENGTH_SHORT).show();
-                    Snackbar snackbar = Snackbar.make(frameLayoutMovie, noInternet, Snackbar.LENGTH_LONG).setAction(tryAgain, new View.OnClickListener() {
+                    Snackbar snackbar = Snackbar.make(frameLayoutMovie, noInternet, Snackbar.LENGTH_SHORT).setAction(tryAgain, new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
                             checkingNetwork();
                         }
                     });
-                    snackbar.setActionTextColor(ContextCompat.getColor(getContext(), R.color.colorRed));
+                    snackbar.setActionTextColor(ContextCompat.getColor(getContext(), R.color.colorAccent));
                     snackbar.show();
                 }
                 else if (status == 1) {//connected

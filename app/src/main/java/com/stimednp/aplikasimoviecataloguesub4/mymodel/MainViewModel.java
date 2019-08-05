@@ -56,6 +56,7 @@ public class MainViewModel extends ViewModel {
             }
         });
     }
+
     public void setListTvShow(final Context context) {
         APIMovieTv apiMovieTv = APIClientMovieTv.getClient().create(APIMovieTv.class);
         Call<TvShowResponse> call = apiMovieTv.getTvShowList(API_KEY, LANGUAGE);

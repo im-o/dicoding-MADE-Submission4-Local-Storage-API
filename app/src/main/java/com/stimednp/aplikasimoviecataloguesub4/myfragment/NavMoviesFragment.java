@@ -2,10 +2,16 @@ package com.stimednp.aplikasimoviecataloguesub4.myfragment;
 
 
 import android.os.Bundle;
+import android.os.Handler;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ProgressBar;
+import android.widget.RelativeLayout;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.coordinatorlayout.widget.CoordinatorLayout;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
@@ -13,15 +19,6 @@ import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
-
-import android.os.Handler;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.FrameLayout;
-import android.widget.ProgressBar;
-import android.widget.RelativeLayout;
-import android.widget.Toast;
 
 import com.google.android.material.snackbar.Snackbar;
 import com.stimednp.aplikasimoviecataloguesub4.R;
@@ -63,7 +60,7 @@ public class NavMoviesFragment extends Fragment implements SwipeRefreshLayout.On
         frameLayoutMovie = view.findViewById(R.id.framel_movie);
         recyclerViewMovie = view.findViewById(R.id.rv_tab_movies);
 
-        if (getActivity() != null){
+        if (getActivity() != null) {
             mainViewModel = ViewModelProviders.of(getActivity()).get(MainViewModel.class);
             mainViewModel.getListMovies().observe(getActivity(), getMovie);
             movieItemsAdapter = new MovieItemsAdapter(getContext());
@@ -108,8 +105,7 @@ public class NavMoviesFragment extends Fragment implements SwipeRefreshLayout.On
                     });
                     snackbar.setActionTextColor(ContextCompat.getColor(getContext(), R.color.colorAccent));
                     snackbar.show();
-                }
-                else if (status == 1) {//connected
+                } else if (status == 1) {//connected
                     showRecyclerList();
                 } else if (status == 2) {//reconnection
                     Toast.makeText(getContext(), reconnect, Toast.LENGTH_SHORT).show();

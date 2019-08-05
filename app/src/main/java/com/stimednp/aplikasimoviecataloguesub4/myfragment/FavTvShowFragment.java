@@ -6,7 +6,6 @@ import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.FrameLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
@@ -20,9 +19,9 @@ import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.stimednp.aplikasimoviecataloguesub4.R;
+import com.stimednp.aplikasimoviecataloguesub4.roomdb.TvShowViewModel;
 import com.stimednp.aplikasimoviecataloguesub4.roomtvshow.TvShow;
 import com.stimednp.aplikasimoviecataloguesub4.roomtvshow.TvShowAdapter;
-import com.stimednp.aplikasimoviecataloguesub4.roomdb.TvShowViewModel;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -56,7 +55,7 @@ public class FavTvShowFragment extends Fragment implements SwipeRefreshLayout.On
         progressBarMovie = view.findViewById(R.id.progressbar_tab_tvshow_room);
         refreshLayoutMovie = view.findViewById(R.id.swipe_scroll_tvshow_room);
         recyclerViewTvShow = view.findViewById(R.id.rv_tab_tvshow_room);
-        
+
         recyclerViewTvShow.setLayoutManager(new LinearLayoutManager(getContext()));
         refreshLayoutMovie.setOnRefreshListener(this);
 
@@ -72,7 +71,7 @@ public class FavTvShowFragment extends Fragment implements SwipeRefreshLayout.On
                 tvShowAdapter = new TvShowAdapter(getContext(), (ArrayList<TvShow>) tvShows);
                 tvShowAdapter.setTvshowList((ArrayList<TvShow>) tvShows);
                 recyclerViewTvShow.setAdapter(tvShowAdapter);
-                if (tvShows.size() < 1){
+                if (tvShows.size() < 1) {
                     textViewEmpty.setVisibility(View.VISIBLE);
                 } else {
                     textViewEmpty.setVisibility(View.GONE);

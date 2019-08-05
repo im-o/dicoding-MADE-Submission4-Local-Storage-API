@@ -102,7 +102,7 @@ public class TvShowItems implements Parcelable {
     public TvShowItems() {
     }
 
-    protected TvShowItems(Parcel in) {
+    private TvShowItems(Parcel in) {
         this.name = in.readString();
         this.original_name = in.readString();
         this.first_air_date = in.readString();

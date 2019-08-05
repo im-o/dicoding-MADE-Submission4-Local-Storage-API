@@ -2,6 +2,13 @@ package com.stimednp.aplikasimoviecataloguesub4.myfragment;
 
 
 import android.os.Bundle;
+import android.os.Handler;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ProgressBar;
+import android.widget.RelativeLayout;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -13,15 +20,6 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
-import android.os.Handler;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.FrameLayout;
-import android.widget.ProgressBar;
-import android.widget.RelativeLayout;
-import android.widget.Toast;
-
 import com.google.android.material.snackbar.Snackbar;
 import com.stimednp.aplikasimoviecataloguesub4.R;
 import com.stimednp.aplikasimoviecataloguesub4.adapter.TvShowItemsAdapter;
@@ -31,7 +29,6 @@ import com.stimednp.aplikasimoviecataloguesub4.mymodel.MainViewModel;
 import com.stimednp.aplikasimoviecataloguesub4.mymodel.TvShowItems;
 
 import java.util.ArrayList;
-import java.util.Objects;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -65,7 +62,7 @@ public class NavTvShowFragment extends Fragment implements SwipeRefreshLayout.On
         recyclerViewMovie = view.findViewById(R.id.rv_tab_tvshow);
 
         refreshLayoutMovie.setOnRefreshListener(this);
-        if (getActivity() != null){
+        if (getActivity() != null) {
             mainViewModel = ViewModelProviders.of(getActivity()).get(MainViewModel.class);
             mainViewModel.getListTvShow().observe(getActivity(), getTvShow);
             tvShowItemsAdapter = new TvShowItemsAdapter(getActivity());
@@ -123,15 +120,12 @@ public class NavTvShowFragment extends Fragment implements SwipeRefreshLayout.On
     }
 
     private void showRecyclerList() {
-        if (mainViewModel != null){
+        if (mainViewModel != null) {
             mainViewModel.setListTvShow(getActivity());
             tvShowItemsAdapter.notifyDataSetChanged();
             recyclerViewMovie.setHasFixedSize(true);
             recyclerViewMovie.setLayoutManager(new LinearLayoutManager(getContext()));
             recyclerViewMovie.setAdapter(tvShowItemsAdapter);
-//            if (progressBarMovie.isShown()) {
-//                showLoading(false);
-//            }
         }
     }
 

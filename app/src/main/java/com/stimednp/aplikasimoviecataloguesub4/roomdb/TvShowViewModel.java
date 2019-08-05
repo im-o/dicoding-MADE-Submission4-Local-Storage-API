@@ -16,16 +16,16 @@ import java.util.List;
  */
 
 public class TvShowViewModel extends AndroidViewModel {
-    private TvShowDao tvShowDao;
     private LiveData<List<TvShow>> tvShowLiveData;
 
     public TvShowViewModel(@NonNull Application application) {
         super(application);
         TvShowRoomDatabase db = TvShowRoomDatabase.getDatabase(application);
-        tvShowDao = db.tvShowDao();
+        TvShowDao tvShowDao = db.tvShowDao();
         tvShowLiveData = tvShowDao.getAllTvShowVm();
     }
-    public LiveData<List<TvShow>> getTvShowList(){
+
+    public LiveData<List<TvShow>> getTvShowList() {
         return tvShowLiveData;
     }
 }

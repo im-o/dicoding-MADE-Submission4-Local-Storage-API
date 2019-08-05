@@ -14,10 +14,7 @@
     <string name="str_wrong_net">Terjadi kesalahan jaringan..</string>
     <string name="str_error_wrong">Terjadi kesalahan..</string>
 
-    <string name="title_activity_test">TESTActivity</string>
-
     <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="favorite">Favorit Saya</string>
     <string name="tap_to_close">Tap 2x untuk keluar</string>
     <string name="str_msg_add_fav">Ditambahkan ke daftar favorit saya..</string>

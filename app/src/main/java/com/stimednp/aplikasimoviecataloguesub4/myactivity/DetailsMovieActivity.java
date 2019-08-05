@@ -6,21 +6,17 @@ import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.cardview.widget.CardView;
 import androidx.coordinatorlayout.widget.CoordinatorLayout;
-import androidx.core.content.ContextCompat;
 
 import com.bumptech.glide.Glide;
-import com.bumptech.glide.annotation.GlideModule;
 import com.google.android.material.appbar.CollapsingToolbarLayout;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
@@ -30,14 +26,14 @@ import com.stimednp.aplikasimoviecataloguesub4.adapter.TvShowItemsAdapter;
 import com.stimednp.aplikasimoviecataloguesub4.addingmethod.AllOtherMethod;
 import com.stimednp.aplikasimoviecataloguesub4.mymodel.MovieItems;
 import com.stimednp.aplikasimoviecataloguesub4.mymodel.TvShowItems;
+import com.stimednp.aplikasimoviecataloguesub4.roomdb.MoviesRoomDatabase;
+import com.stimednp.aplikasimoviecataloguesub4.roomdb.TvShowRoomDatabase;
 import com.stimednp.aplikasimoviecataloguesub4.roommovies.Movies;
 import com.stimednp.aplikasimoviecataloguesub4.roommovies.MoviesAdapter;
 import com.stimednp.aplikasimoviecataloguesub4.roomtvshow.TvShow;
 import com.stimednp.aplikasimoviecataloguesub4.roomtvshow.TvShowAdapter;
-import com.stimednp.aplikasimoviecataloguesub4.roomdb.MoviesRoomDatabase;
-import com.stimednp.aplikasimoviecataloguesub4.roomdb.TvShowRoomDatabase;
 
-public class DetailsMovieActivity extends AppCompatActivity implements View.OnClickListener, View.OnLongClickListener {
+public class DetailsMovieActivity extends AppCompatActivity implements View.OnClickListener {
     public static final String EXTRA_MOVIE = "extra_movie";
     public static final String EXTRA_WHERE_FROM = "extra_where_from";
     private Toolbar toolbarDetails;
@@ -74,7 +70,6 @@ public class DetailsMovieActivity extends AppCompatActivity implements View.OnCl
         cardViewDetails = findViewById(R.id.card_view_img_detail);
         fabFavoriteFalse = findViewById(R.id.fab_favorite_false);
         fabFavoriteFalse.setOnClickListener(this);
-        fabFavoriteFalse.setOnLongClickListener(this);
         strMsgSuccessInsert = getResources().getString(R.string.str_msg_add_fav);
         strMsgSuccessDelete = getResources().getString(R.string.str_msg_delete_fav);
         collapse.setExpandedTitleColor(Color.argb(0, 0, 0, 0));
@@ -289,6 +284,7 @@ public class DetailsMovieActivity extends AppCompatActivity implements View.OnCl
                 TvShowRoomDatabase.getDatabase(getApplicationContext()).tvShowDao().deleteByTitle(tvShowTitle);
                 return null;
             }
+
             @Override
             protected void onPostExecute(Void aVoid) {
                 super.onPostExecute(aVoid);
@@ -319,29 +315,9 @@ public class DetailsMovieActivity extends AppCompatActivity implements View.OnCl
     @Override
     public void onClick(View v) {
         int id = v.getId();
-        String strMsgSuccessInsert = getResources().getString(R.string.str_msg_add_fav);
-        String whereFrom = getIntent().getStringExtra(EXTRA_WHERE_FROM);
         if (id == R.id.fab_favorite_false) {
             setIsFavorite();
-
-//            if ((whereFrom.equals(MovieItemsAdapter.TAG) || (whereFrom.equals(MoviesAdapter.TAG)))) {
-//                Snackbar snackbar = Snackbar.make(containerCoord, strMsgSuccessInsert, Snackbar.LENGTH_SHORT);
-//                snackbar.show();
-//                setMovies();
-//            } else if ((whereFrom.equals(TvShowItemsAdapter.TAG)) || (whereFrom.equals(TvShowAdapter.TAG))) {
-//                Snackbar snackbar = Snackbar.make(containerCoord, strMsgSuccessInsert, Snackbar.LENGTH_SHORT);
-//                snackbar.show();
-//                setTvShows();
-//            }
         }
-    }
-
-    @Override
-    public boolean onLongClick(View v) {
-        radRef();
-        boolean isHello = radRef();
-        Log.d("INIMI", "onLongClick: " + isHello);
-        return false;
     }
 
     private void tesPref(boolean isFavor) {

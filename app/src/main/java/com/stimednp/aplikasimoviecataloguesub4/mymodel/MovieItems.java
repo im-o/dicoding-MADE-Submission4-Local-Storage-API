@@ -102,7 +102,7 @@ public class MovieItems implements Parcelable {
     public MovieItems() {
     }
 
-    protected MovieItems(Parcel in) {
+    private MovieItems(Parcel in) {
         this.title = in.readString();
         this.original_title = in.readString();
         this.release_date = in.readString();

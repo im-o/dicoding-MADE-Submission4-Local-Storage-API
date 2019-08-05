@@ -20,7 +20,7 @@ public class TvShowResponse {
         this.page = page;
     }
 
-    public List<TvShowItems> getResults() {
+    List<TvShowItems> getResults() {
         return results;
     }
 

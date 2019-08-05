@@ -20,7 +20,7 @@ public class MoviesResponse {
         this.page = page;
     }
 
-    public List<MovieItems> getResults() {
+    List<MovieItems> getResults() {
         return results;
     }
 

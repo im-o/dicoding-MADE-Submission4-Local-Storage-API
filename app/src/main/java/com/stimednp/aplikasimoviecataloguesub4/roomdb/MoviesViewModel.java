@@ -16,13 +16,12 @@ import java.util.List;
  */
 
 public class MoviesViewModel extends AndroidViewModel {
-    private MoviesDao moviesDao;
     private LiveData<List<Movies>> moviesLiveData;
 
     public MoviesViewModel(@NonNull Application application) {
         super(application);
         MoviesRoomDatabase db = MoviesRoomDatabase.getDatabase(application);
-        moviesDao = db.moviesDao();
+        MoviesDao moviesDao = db.moviesDao();
         moviesLiveData = moviesDao.getAllMoviesVm();
     }
 

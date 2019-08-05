@@ -86,6 +86,7 @@ public class TvShowItemsAdapter extends RecyclerView.Adapter<TvShowItemsAdapter.
             cardViewDesc = itemView.findViewById(R.id.card_view_desc);
             cardViewRating = itemView.findViewById(R.id.card_view_rating);
         }
+
         void bind(TvShowItems tvShowItems) {
             String pathImg = "https://image.tmdb.org/t/p/w300_and_h450_bestv2";
             String title = tvShowItems.getName();

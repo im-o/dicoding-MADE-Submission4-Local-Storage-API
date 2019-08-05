@@ -6,11 +6,8 @@ import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.FrameLayout;
 import android.widget.ProgressBar;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -22,9 +19,9 @@ import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.stimednp.aplikasimoviecataloguesub4.R;
+import com.stimednp.aplikasimoviecataloguesub4.roomdb.MoviesViewModel;
 import com.stimednp.aplikasimoviecataloguesub4.roommovies.Movies;
 import com.stimednp.aplikasimoviecataloguesub4.roommovies.MoviesAdapter;
-import com.stimednp.aplikasimoviecataloguesub4.roomdb.MoviesViewModel;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -73,7 +70,7 @@ public class FavMoviesFragment extends Fragment implements SwipeRefreshLayout.On
                 moviesAdapter = new MoviesAdapter(getContext(), (ArrayList<Movies>) movies);
                 moviesAdapter.setMoviesList((ArrayList<Movies>) movies);
                 recyclerViewMovie.setAdapter(moviesAdapter);
-                if (movies.size() < 1){
+                if (movies.size() < 1) {
                     textViewEmpty.setVisibility(View.VISIBLE);
                 } else {
                     textViewEmpty.setVisibility(View.GONE);

@@ -30,8 +30,6 @@ import java.util.List;
  * A simple {@link Fragment} subclass.
  */
 public class FavTvShowFragment extends Fragment implements SwipeRefreshLayout.OnRefreshListener {
-
-    private static final String TAG = FavTvShowFragment.class.getSimpleName();
     private RecyclerView recyclerViewTvShow;
     private TvShowAdapter tvShowAdapter;
     private SwipeRefreshLayout refreshLayoutMovie;

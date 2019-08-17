@@ -25,28 +25,12 @@ public class MovieItems implements Parcelable {
         this.title = title;
     }
 
-    public String getOriginal_title() {
-        return original_title;
-    }
-
-    public void setOriginal_title(String original_title) {
-        this.original_title = original_title;
-    }
-
     public String getRelease_date() {
         return release_date;
     }
 
-    public void setRelease_date(String release_date) {
-        this.release_date = release_date;
-    }
-
     public Double getVote_average() {
         return vote_average;
-    }
-
-    public void setVote_average(Double vote_average) {
-        this.vote_average = vote_average;
     }
 
     public String getVote_count() {

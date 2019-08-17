@@ -20,7 +20,4 @@ public interface MoviesDao {
 
     @Query("DELETE FROM movies WHERE title= :title_movie")
     void deleteByTitle(String title_movie);
-
-    @Query("DELETE FROM movies WHERE id= :id")
-    void deleteById(int id);
 }

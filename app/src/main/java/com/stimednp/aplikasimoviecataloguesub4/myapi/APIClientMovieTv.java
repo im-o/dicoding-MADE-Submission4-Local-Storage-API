@@ -1,5 +1,8 @@
 package com.stimednp.aplikasimoviecataloguesub4.myapi;
 
+import android.util.Log;
+import android.widget.Toast;
+
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 

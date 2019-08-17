@@ -120,7 +120,7 @@ public class NavMoviesFragment extends Fragment implements SwipeRefreshLayout.On
 
     private void showRecyclerList() {
         if (mainViewModel != null) {
-            mainViewModel.setListMovies(getActivity());
+            mainViewModel.setListMovies();
             movieItemsAdapter.notifyDataSetChanged();
             recyclerViewMovie.setHasFixedSize(true);
             recyclerViewMovie.setLayoutManager(new LinearLayoutManager(getContext()));

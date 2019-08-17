@@ -29,13 +29,14 @@ public class MainViewModel extends ViewModel {
     private MutableLiveData<ArrayList<MovieItems>> listMovies = new MutableLiveData<>();
     private MutableLiveData<ArrayList<TvShowItems>> listTvShow = new MutableLiveData<>();
 
-    public void setListMovies(final Context context) {
+    public void setListMovies() {
         APIMovieTv apiMovieTv = APIClientMovieTv.getClient().create(APIMovieTv.class);
         Call<MoviesResponse> call = apiMovieTv.getMovieList(API_KEY, LANGUAGE);
         final ArrayList<MovieItems> movieItems = new ArrayList<>();
         call.enqueue(new Callback<MoviesResponse>() {
             @Override
             public void onResponse(@NonNull Call<MoviesResponse> call, @NonNull Response<MoviesResponse> response) {
+                Log.d(TAG, "onResponse BODY setListMovies : "+response.body());
                 List<MovieItems> movieItemList = null;
                 if (response.body() != null) {
                     movieItemList = response.body().getResults();
@@ -57,13 +58,14 @@ public class MainViewModel extends ViewModel {
         });
     }
 
-    public void setListTvShow(final Context context) {
+    public void setListTvShow() {
         APIMovieTv apiMovieTv = APIClientMovieTv.getClient().create(APIMovieTv.class);
         Call<TvShowResponse> call = apiMovieTv.getTvShowList(API_KEY, LANGUAGE);
         final ArrayList<TvShowItems> tvShowItems = new ArrayList<>();
         call.enqueue(new Callback<TvShowResponse>() {
             @Override
             public void onResponse(@NonNull Call<TvShowResponse> call, @NonNull Response<TvShowResponse> response) {
+                Log.d(TAG, "onResponse BODY setListTvShow : "+response.body());
                 List<TvShowItems> movieItemList = null;
                 if (response.body() != null) {
                     movieItemList = response.body().getResults();

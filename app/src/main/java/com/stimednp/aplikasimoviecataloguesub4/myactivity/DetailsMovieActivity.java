@@ -37,7 +37,6 @@ public class DetailsMovieActivity extends AppCompatActivity implements View.OnCl
     public static final String EXTRA_MOVIE = "extra_movie";
     public static final String EXTRA_WHERE_FROM = "extra_where_from";
     private Toolbar toolbarDetails;
-    private CollapsingToolbarLayout collapse;
     private TextView tvMovieTitle, tvMovieDesc, tvMovieRelease, tvMovieRating, tvMovieVoteCount;
     private ImageView imgViewFromUrl, imgViewBg;
     private CardView cardViewDetails;
@@ -59,7 +58,7 @@ public class DetailsMovieActivity extends AppCompatActivity implements View.OnCl
         //inisial
         containerCoord = findViewById(R.id.container_coordinator_detail);
         toolbarDetails = findViewById(R.id.toolbar_detail);
-        collapse = findViewById(R.id.collapse_toolbar_detail);
+        CollapsingToolbarLayout collapse = findViewById(R.id.collapse_toolbar_detail);
         tvMovieTitle = findViewById(R.id.tv_title_detail);
         tvMovieDesc = findViewById(R.id.tv_desc_detail);
         tvMovieRelease = findViewById(R.id.tv_release_date_detail);
@@ -294,22 +293,6 @@ public class DetailsMovieActivity extends AppCompatActivity implements View.OnCl
         }
         DeleteTvShowByTitle deleteTvShowByTitle = new DeleteTvShowByTitle();
         deleteTvShowByTitle.execute();
-    }
-
-    private void setMode(int itemId) {
-        String strMsgSuccessInsert = getResources().getString(R.string.str_msg_add_fav);
-        String whereFrom = getIntent().getStringExtra(EXTRA_WHERE_FROM);
-        if (itemId == R.id.fab_favorite_false) {
-            if ((whereFrom.equals(MovieItemsAdapter.TAG) || (whereFrom.equals(MoviesAdapter.TAG)))) {
-                Snackbar snackbar = Snackbar.make(containerCoord, strMsgSuccessInsert, Snackbar.LENGTH_SHORT);
-                snackbar.show();
-                setMovies();
-            } else if ((whereFrom.equals(TvShowItemsAdapter.TAG)) || (whereFrom.equals(TvShowAdapter.TAG))) {
-                Snackbar snackbar = Snackbar.make(containerCoord, strMsgSuccessInsert, Snackbar.LENGTH_SHORT);
-                snackbar.show();
-                setTvShows();
-            }
-        }
     }
 
     @Override

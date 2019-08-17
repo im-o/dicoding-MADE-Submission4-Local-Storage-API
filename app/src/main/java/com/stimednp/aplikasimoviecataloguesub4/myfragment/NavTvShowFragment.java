@@ -121,7 +121,7 @@ public class NavTvShowFragment extends Fragment implements SwipeRefreshLayout.On
 
     private void showRecyclerList() {
         if (mainViewModel != null) {
-            mainViewModel.setListTvShow(getActivity());
+            mainViewModel.setListTvShow();
             tvShowItemsAdapter.notifyDataSetChanged();
             recyclerViewMovie.setHasFixedSize(true);
             recyclerViewMovie.setLayoutManager(new LinearLayoutManager(getContext()));
